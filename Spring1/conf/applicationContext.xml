@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+	
+	<bean id="person1" class="com.gui.bean.Person">
+		<property name="name" value="小明"></property>
+		<property name="age" value="15"></property>
+	</bean>
+	<!-- 
+	<bean id="person2" class="com.gui.bean.Person" p:name="小冰" p:age="20"></bean>
+	
+	<bean id="person3" class="com.gui.bean.Person">
+		<property name="teacher" ref="teacher"></property>
+		<property name="name" value="小红"></property>
+		<property name="age" value="19"></property>
+		<property name="teacher.age" value="3"></property>
+	</bean>
+	
+	<bean id="person4" class="com.gui.bean.Person" p:age="18" p:name="小晗" p:teacher-ref="teacher"></bean>
+
+	<bean id="person5" class="com.gui.bean.Person">
+		<property name="name" value="Sakura"></property>
+		<property name="age" value="15"></property>
+		<property name="teacher">
+			<bean id="teacher1" class="com.gui.bean.Teacher">
+				<property name="name" value="仕鸿"></property>
+				<property name="age" value="22"></property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="person6" class="com.gui.bean.Person">
+		<property name="name" value="小小黑"></property>
+		<property name="age" value="14"></property>
+		<property name="students">
+			<list>
+				<ref bean="teacher"/>
+				<bean class="com.gui.bean.Teacher">
+					<property name="name" value="茨木"></property>
+					<property name="age" value="30"></property>
+				</bean>
+				<bean class="com.gui.bean.Teacher">
+					<property name="name" value="茨木"></property>
+					<property name="age" value="30"></property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="person7" class="com.gui.bean.Person" scope="">
+		<property name="name" value="小小黑"></property>
+		<property name="age" value="14"></property>
+		<property name="students" ref="students">
+			
+		</property>
+	</bean>
+	
+	<util:list id="students">
+		<ref bean="teacher"></ref>
+		<bean class="com.gui.bean.Person">
+			<property name="name" value="周杰伦"></property>
+			<property name="age" value="40"></property>
+		</bean>
+	</util:list>
+	
+	<util:map id="map1">
+		<entry>
+			<key>
+				<value>1</value>
+			</key>
+			<value>你好</value>
+		</entry>
+	</util:map>
+	
+	<bean id="teacher" class="com.gui.bean.Teacher">
+		<property name="name" value="小丽"></property>
+		<property name="age" value="25"></property>
+	</bean>
+	 -->
+	 <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	 	<property name="location" value="jdbc.properties"></property>
+	 </bean>
+	 
+	 <context:property-placeholder location="jdbc.properties"/>
+	 
+	 
+	 <bean id="datasource" class="com.alibaba.druid.pool.DruidDataSource">
+	 	<property name="driverClassName" value="${driverClassName}"></property>
+	 	<property name="url" value="${url}"></property>
+	 	<property name="username" value="${username}"></property>
+	 	<property name="password" value="${password}"></property>
+	 </bean>
+	
+	
+
+</beans>

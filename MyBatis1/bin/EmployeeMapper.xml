@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mabatis.org//DTD Mapper"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.mapper.EmployeeMapper">
+
+	<select id="getUserById" resultType="com.mybatis.bean.Employee">
+		select employee_id,last_name,salary from employees where employee_id = #{id}
+	</select>
+	
+	<select id="getAll" resultType="com.mybatis.bean.Employee">
+		select employee_id,last_name,salary from employees
+	</select>
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="employeeId">
+		insert into employees(employee_id,last_name,salary) values(#{employeeId},#{lastName},#{salary})
+	</insert>
+	
+	<resultMap type="com.mybatis.bean.Employee" id="map1">
+		<id column="employee_id" property="employeeId"/>
+		<result column="last_name" property="lastName"/>
+		<result column="salary" property="salary"/>
+		<association property="department" select="getDepartment" column="department_id"></association>
+	</resultMap>
+	
+	<select id="getAllReturnMap" resultMap="map1">
+		select employee_id,last_name,salary,department_id,department_id from employees
+	</select>
+	
+	<select id="getDepartment" resultType="com.mybatis.bean.Department">
+		select department_id,department_name from departments where department_id = #{id}
+	</select>
+	
+	<select id="getUserByIdReturnMap" resultType="map">
+		select employee_id,last_name,salary from employees where employee_id = #{id}
+	</select>
+	
+</mapper>
