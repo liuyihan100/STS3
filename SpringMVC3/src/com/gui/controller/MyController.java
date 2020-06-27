@@ -3,7 +3,10 @@ package com.gui.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Collection;
 import java.util.Map;
 
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.gui.bean.Department;
 import com.gui.bean.Employee;
@@ -93,5 +97,18 @@ public class MyController {
 		ResponseEntity<byte[]> entity = new ResponseEntity<byte[]>(b, headers, HttpStatus.OK);
 		is.close();
 		return entity;
+	}
+	
+	@RequestMapping("upload")
+	public String upload(MultipartFile upic,HttpSession session) throws IOException {
+		String filename = upic.getOriginalFilename();
+		String path = session.getServletContext().getRealPath("photo")  + "/" + filename;
+		upic.transferTo(new File(path));
+		return "success";
+	}
+	
+	@RequestMapping("la")
+	public String la() {
+		return "abc";
 	}
 }

@@ -63,6 +63,11 @@
 <body>
 	<a href="emps">员工信息</a></br></br>
 	<input class="test" type="button" value="json测试"/></br></br>
-	<a href="pic">下载</a>
+	<a href="pic">下载</a></br>
+	<form action="upload" method="post" enctype="multipart/form-data">
+		图片：<input type="file" name="upic"/><br/>
+		<input type="submit" value="提交"/>
+	</form>
+	<a href="la">你好</a>
 </body>
 </html>
