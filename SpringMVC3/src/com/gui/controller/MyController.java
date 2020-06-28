@@ -8,11 +8,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Collection;
+import java.util.Enumeration;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gui.bean.Department;
@@ -108,7 +112,10 @@ public class MyController {
 	}
 	
 	@RequestMapping("la")
-	public String la() {
-		return "abc";
+	public void la(HttpSession session) {
+		ServletContext servletContext = session.getServletContext();
+		ApplicationContext object = (ApplicationContext)servletContext.getAttribute(WebApplicationContext.class.getName() + ".ROOT");
+		Department bean = object.getBean("department", Department.class);
+		System.out.println(bean);
 	}
 }

@@ -2,6 +2,10 @@ package com.gui.servlet;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,12 +59,12 @@ public class MyServlet {
 	
 	
 	@RequestMapping(value="hello")
-	public ModelAndView hello() {
-		ClassPathXmlApplicationContext cs = new ClassPathXmlApplicationContext("jdbc.xml");
-		EmployeeDao bean = cs.getBean("employeeDao", EmployeeDao.class);
+	public ModelAndView hello(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		List<Employee> list = bean.query();
-		mv.addObject("list", list);
+		ServletContext sc = session.getServletContext();
+		ApplicationContext cs = (ApplicationContext)sc.getAttribute("cs");
+		Employee employee = cs.getBean("employee", Employee.class);
+		System.out.println(employee);
 		mv.setViewName("success");
 		return mv;
 	}

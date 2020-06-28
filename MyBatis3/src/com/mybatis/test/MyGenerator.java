@@ -15,8 +15,8 @@ public class MyGenerator {
 	public void generatee() throws Exception {
 		List<String> warnings = new ArrayList<String>();
 		boolean overwrite = true;
-		// 指定逆向工程配置文件
-		File configFile = new File("C:\\Users\\帅帅小晗\\Desktop\\资料\\STS3\\MyBatis3\\lib\\mbg.xml");
+		
+		File configFile = new File("C:\\Users\\˧˧С��\\Desktop\\����\\STS3\\MyBatis3\\conf\\com\\mybatis\\mapper\\EmployeesMapper.xml");
 		ConfigurationParser cp = new ConfigurationParser(warnings);
 		Configuration config = cp.parseConfiguration(configFile);
 		DefaultShellCallback callback = new DefaultShellCallback(overwrite);

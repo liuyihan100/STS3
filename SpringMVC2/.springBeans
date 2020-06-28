@@ -8,8 +8,10 @@
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
 		<config>conf/jdbc.xml</config>
+		<config>conf/Context.xml</config>
 	</configs>
 	<autoconfigs>
+		<config>WebContent/WEB-INF/SpringMVC-servlet.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>

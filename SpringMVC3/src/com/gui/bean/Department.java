@@ -14,7 +14,7 @@ public class Department {
 	}
 	public Department() {
 		super();
-		// TODO Auto-generated constructor stub
+		System.out.println("hello,world");
 	}
 	public Department(Integer id, String name) {
 		super();
