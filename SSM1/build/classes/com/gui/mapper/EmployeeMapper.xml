@@ -32,9 +32,8 @@
 	</select>
 
 	<update id="update">
-		update employees set employee_id =
-		#{employeeId},last_name = #{LastName},salary = {salary},department_id
-		= {department.id}
+		update employees set last_name = #{lastName},salary = #{salary},department_id
+		= #{department.id} where employee_id = #{employeeId}
 	</update>
 
 </mapper>

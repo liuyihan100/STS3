@@ -54,7 +54,7 @@
 				<td>${employee.lastName}</td>
 				<td>${employee.salary}</td>
 				<td>${employee.department.name}</td>
-				<td><a href="emp">UPDATE</a> <a href="emp">DELETE</a></td>
+				<td><a href="${pageContext.servletContext.contextPath }/emp/${employee.employeeId }">UPDATE</a> <a href="emp">DELETE</a></td>
 			</tr>
 		</c:forEach>
 		<tr>

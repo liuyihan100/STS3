@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.gui.bean.Department;
 import com.gui.bean.Employee;
+import com.gui.serviceImpl.DepartmentServiceImpl;
 import com.gui.serviceImpl.EmployeeServiceImpl;
 import com.gui.util.PageUtil;
 
@@ -23,7 +25,10 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeServiceImpl employeeServiceImpl;
 	
-	@RequestMapping(value = "emps/{pageNum}",method = RequestMethod.GET)
+	@Autowired
+	private DepartmentServiceImpl departmentServiceImpl;
+	
+	@RequestMapping(value = "/emps/{pageNum}",method = RequestMethod.GET)
 	public String getAll(Map<String,Object> map,@PathVariable("pageNum")Integer pageNum,HttpServletRequest request) {
 		PageHelper.startPage(pageNum, 5);
 		List<Employee> employees = employeeServiceImpl.getAll();
@@ -31,9 +36,22 @@ public class EmployeeController {
 		String page = PageUtil.toPage(request, pageInfo);
 		map.put("employees", employees);
 		map.put("page", page);
-		System.out.println(request.getContextPath()); //返回项目根目录
-		System.out.println(request.getRequestURI()); //返回页面相对于
-		System.out.println(request.getRequestURL());
 		return "list";
+	}
+	
+	@RequestMapping(value="/emp/{id}",method=RequestMethod.GET)
+	public String toUpdate(@PathVariable("id")Integer id,Map<String,Object> map) {
+		List<Department> departments = departmentServiceImpl.getAllDepartment();
+		Employee employee = employeeServiceImpl.getById(id);
+		map.put("departments", departments);
+		map.put("employee", employee);
+		
+		return "update";
+	}
+	
+	@RequestMapping(value="emp",method=RequestMethod.PUT)
+	public String update(Employee employee) {
+		employeeServiceImpl.update(employee);
+		return "redirect:emps/1";
 	}
 }
