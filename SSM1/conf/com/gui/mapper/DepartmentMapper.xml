@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "mybatis3.dtd"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gui.mapper.DepartmentMapper">
+
+	<select id="getAll" resultType="Department">
+		select department_id id,department_name name from departments
+	</select>
+	
+</mapper>

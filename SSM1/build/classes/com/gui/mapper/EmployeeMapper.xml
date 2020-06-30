@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "mybatis3.dtd"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gui.mapper.EmployeeMapper">
+
+	<resultMap type="Employee" id="map1">
+		<id column="employee_id" property="employeeId" />
+		<result column="last_name" property="lastName" />
+		<result column="salary" property="salary" />
+		<association property="department" javaType="Department">
+			<id column="department_id" property="id" />
+			<result column="department_name" property="name" />
+		</association>
+	</resultMap>
+
+	<select id="getById" resultMap="map1">
+		select
+		employee_id,last_name,salary,employees.department_id,department_name from
+		employees
+		left join departments on employees.department_id =
+		departments.department_id
+		where employee_id = #{id}
+	</select>
+
+	<select id="getAll" resultMap="map1">
+		select
+		employee_id,last_name,salary,employees.department_id,department_name from
+		employees
+		left join departments on employees.department_id =
+		departments.department_id
+	</select>
+
+	<update id="update">
+		update employees set employee_id =
+		#{employeeId},last_name = #{LastName},salary = {salary},department_id
+		= {department.id}
+	</update>
+
+</mapper>
