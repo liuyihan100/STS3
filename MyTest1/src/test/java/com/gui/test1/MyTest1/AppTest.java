@@ -1,4 +1,4 @@
-package com.gui.maven.Maven4;
+package com.gui.test1.MyTest1;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
